@@ -34,6 +34,13 @@
  *  */
 
 // by recursioin
+//
+// time complexity
+// m length of target
+// n length of array
+// time O(n^m * m {cz of slice })  [ branching factor to the power height   ]
+// space O(m * m)
+//
 
 const canConstruct = (target, words) => {
   if (target === "") return true;
@@ -57,6 +64,12 @@ const canConstruct = (target, words) => {
 //     "aaaaaa",
 //   ])
 // );
+
+//
+// memoization
+// time O(n*m^2)
+// space O(m^2)
+//
 
 const canConstructMemoized = (target, words, memo = {}) => {
   if (target === "") return true;

@@ -10,20 +10,20 @@
 // by recursion
 
 const allConstruct = (target, wordBank) => {
-  if (target === "") return true;
-  let count = 0;
-  const allMAtches = [];
+  if (target === "") return [[]];
+
+  let allMAtches = [];
 
   for (let word of wordBank) {
+    let suffix = target.slice(word.length);
+
     if (target.indexOf(word) === 0) {
-      let isConstructPossible = countConstruct(
-        target.slice(word.length),
-        wordBank
-      );
-      if (isConstructPossible) {
-        count += 1;
-      }
+      let isConstructPossible = allConstruct(suffix, wordBank);
+      let targetWays = isConstructPossible.map((match) => [word, ...match]);
+      allMAtches.push(...targetWays);
     }
   }
   return allMAtches;
 };
+
+console.log(allConstruct("abcdef", ["ab", "cd", "abc", "ef", "def"]));

@@ -27,3 +27,23 @@ const allConstruct = (target, wordBank) => {
 };
 
 console.log(allConstruct("abcdef", ["ab", "cd", "abc", "ef", "def"]));
+
+// memeoization
+
+const memoizedAllConstruct = (target, wordBank) => {
+  if (target === "") return [[]];
+  if (target in memo) return memo[target];
+
+  let allMAtches = [];
+
+  for (let word of wordBank) {
+    let suffix = target.slice(word.length);
+
+    if (target.indexOf(word) === 0) {
+      let isConstructPossible = memoizedAllConstruct(suffix, wordBank, memo);
+      let targetWays = isConstructPossible.map((match) => [word, ...match]);
+      allMAtches.push(...targetWays);
+    }
+  }
+  return allMAtches;
+};
